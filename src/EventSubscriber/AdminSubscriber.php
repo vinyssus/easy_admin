@@ -5,6 +5,7 @@ namespace App\EventSubscriber;
 use App\Entity\Categorie;
 use App\Entity\Produit;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AdminSubscriber implements EventSubscriberInterface
@@ -13,7 +14,7 @@ class AdminSubscriber implements EventSubscriberInterface
     {
        return [
         BeforeEntityPersistedEvent::class => ['setCreateAt'],
-        BeforeEntityPersistedEvent::class => ['setUpdateAt']
+        BeforeEntityUpdatedEvent::class => ['setUpdateAt']
        ];
     }
 
@@ -23,7 +24,7 @@ class AdminSubscriber implements EventSubscriberInterface
         $entityInstance->setCreateAt(new \DateTimeImmutable());
     }
 
-    public function setUpdateAt(BeforeEntityPersistedEvent $event){
+    public function setUpdateAt(BeforeEntityUpdatedEvent $event){
         $entityInstance = $event->getEntityInstance();
         if(!$entityInstance instanceof Produit && !$entityInstance instanceof Categorie) return;
         $entityInstance->setUpdateAt(new \DateTimeImmutable());
