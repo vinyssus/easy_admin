@@ -8,7 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class EventSubscriber implements EventSubscriberInterface
+class AdminSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
